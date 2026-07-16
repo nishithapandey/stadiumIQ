@@ -1,0 +1,32 @@
+{
+  "options": [
+    {
+      "type": "Shuttle Bus",
+      "routes": ["Stadium ↔ Times Square (NYC)", "Stadium ↔ Newark Penn Station"],
+      "frequency": "Every 15 min on match days",
+      "eco_note": "🌿 Zero-emission electric shuttles",
+      "accessibility": true
+    },
+    {
+      "type": "NJ Transit / Metro-North",
+      "routes": ["Secaucus Junction to stadium", "Penn Station NYC to Secaucus"],
+      "frequency": "Every 10 min (match day service)",
+      "eco_note": "🌿 Recommended — lowest carbon footprint",
+      "accessibility": true
+    },
+    {
+      "type": "Rideshare Drop-off",
+      "routes": ["Lot A designated drop-off zone"],
+      "frequency": "On-demand",
+      "eco_note": "Consider carpooling to reduce emissions",
+      "accessibility": false
+    },
+    {
+      "type": "Parking",
+      "routes": ["Lots B, C, D open 3h before kickoff"],
+      "frequency": "N/A",
+      "eco_note": "EV charging available in Lot B",
+      "accessibility": true
+    }
+  ]
+}

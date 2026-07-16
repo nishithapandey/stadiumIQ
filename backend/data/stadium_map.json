@@ -1,0 +1,17 @@
+{
+  "venue": "MetLife Stadium, New York/New Jersey",
+  "capacity": 82500,
+  "sections": {
+    "100": {"level": "field", "description": "Field-level seating, Gates A & B"},
+    "200": {"level": "lower", "description": "Lower bowl, Gates C & D"},
+    "300": {"level": "upper", "description": "Upper deck, Gates E & F"},
+    "VIP": {"level": "premium", "description": "Premium suites, Gate E (VIP entrance)"}
+  },
+  "facilities": {
+    "restrooms": ["Level 1 near Gate A", "Level 1 near Gate C", "Level 2 all quadrants", "Level 3 near Gate B"],
+    "food_beverage": ["Concourse A - Burger stands, Pizza", "Concourse B - International cuisine", "Concourse C - Snacks, Beverages"],
+    "medical": ["Gate A Medical Station", "Gate C Medical Station", "Field-side Medical Unit"],
+    "information_desks": ["Gate A Main Entrance", "Gate C Ground Floor"],
+    "accessibility": ["Wheelchair drop-off: Gate F", "Elevator banks: Gates B, D", "Sensory room: Section 115"]
+  }
+}
