@@ -49,7 +49,7 @@ async def generate_response(
     try:
         system_prompt = build_system_prompt(persona, language, section)
         model = genai.GenerativeModel(
-            model_name="gemini-1.5-flash",
+            model_name="models/gemini-2.5-flash",
             system_instruction=system_prompt,
             generation_config=GENERATION_CONFIG,
             safety_settings=SAFETY_SETTINGS,
