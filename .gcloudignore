@@ -1,0 +1,45 @@
+# Google Cloud Build ignore file
+.gcloudignore
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+.cache/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+venv/
+.venv/
+
+# Build outputs
+dist/
+build/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation (deploy separately)
+*.md
+!README.md
+
+# Tests
+**/tests/
+**/*.test.js
+**/*.test.jsx
+**/*.test.py
