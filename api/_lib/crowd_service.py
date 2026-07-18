@@ -9,7 +9,7 @@ Named constants are used throughout for clarity and testability.
 import random
 import math
 from datetime import datetime
-from models.schemas import CrowdStatus
+from ._lib.schemas import CrowdStatus
 
 # Stadium gate definitions
 GATES: list[str] = [

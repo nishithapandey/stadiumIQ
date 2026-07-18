@@ -3,12 +3,62 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="StadiumIQ — FIFA World Cup 2026 Smart Stadium GenAI Assistant" />
+  <meta name="description" content="StadiumIQ — FIFA World Cup 2026 Smart Stadium GenAI Assistant. AI-powered navigation, crowd monitoring, and multilingual support." />
   <meta name="theme-color" content="#020617" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="StadiumIQ · FIFA World Cup 2026 Assistant" />
+  <meta property="og:description" content="AI-powered smart stadium assistant with real-time crowd monitoring, indoor navigation, and multilingual support." />
+  <meta property="og:site_name" content="StadiumIQ" />
+
   <title>StadiumIQ · FIFA WC 2026</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+  <!-- Google Fonts — Inter for premium typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Google Analytics 4 — privacy-first config -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-STADIUMIQ26"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-STADIUMIQ26', {
+      anonymize_ip: true,
+      cookie_flags: 'SameSite=Strict;Secure',
+      send_page_view: true
+    });
+  </script>
+
+  <!-- Structured Data — JSON-LD for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "StadiumIQ",
+    "description": "AI-powered smart stadium assistant for FIFA World Cup 2026",
+    "applicationCategory": "SportsApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "creator": {
+      "@type": "Organization",
+      "name": "StadiumIQ Team"
+    }
+  }
+  </script>
 </head>
 <body>
+  <noscript>
+    <div style="padding: 2rem; text-align: center; font-family: system-ui, sans-serif; background: #020617; color: #e2e8f0; min-height: 100vh;">
+      <h1>StadiumIQ requires JavaScript</h1>
+      <p>Please enable JavaScript in your browser to use the FIFA World Cup 2026 Smart Stadium Assistant.</p>
+      <p>For stadium assistance without JavaScript, please visit the nearest information desk or call stadium support.</p>
+    </div>
+  </noscript>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
 </body>

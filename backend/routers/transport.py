@@ -1,21 +1,27 @@
-"""Transport information endpoint."""
+"""Transport information endpoint.
+
+Returns available transport options to/from the stadium.
+Uses functools.lru_cache for a clean singleton pattern.
+"""
 
 import json
 import os
+from functools import lru_cache
 from fastapi import APIRouter
 
 router = APIRouter()
 
-_TRANSPORT_DATA = None
 
+@lru_cache(maxsize=1)
+def _load_transport() -> dict:
+    """Load and cache transport data from the JSON file.
 
-def _load_transport():
-    global _TRANSPORT_DATA
-    if _TRANSPORT_DATA is None:
-        data_path = os.path.join(os.path.dirname(__file__), "../data/transport_data.json")
-        with open(data_path) as f:
-            _TRANSPORT_DATA = json.load(f)
-    return _TRANSPORT_DATA
+    Uses lru_cache for a clean singleton pattern instead of mutable global state.
+    The data is loaded once and cached permanently since it's static.
+    """
+    data_path = os.path.join(os.path.dirname(__file__), "../data/transport_data.json")
+    with open(data_path, encoding="utf-8") as f:
+        return json.load(f)
 
 
 @router.get("/transport")

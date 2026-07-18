@@ -10,8 +10,8 @@ import logging
 from typing import Optional
 from functools import lru_cache
 import google.generativeai as genai
-from models.schemas import PersonaType, Language, ChatMessage
-from services.prompt_builder import build_system_prompt
+from ._lib.schemas import PersonaType, Language, ChatMessage
+from ._lib.prompt_builder import build_system_prompt
 
 logger = logging.getLogger(__name__)
 

@@ -2,13 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Accessible focus style — never remove outline */
+/* === Premium Typography === */
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* === Accessible Focus Styles — never remove outline === */
 :focus-visible {
   outline: 2px solid #3b82f6;
   outline-offset: 2px;
 }
 
-/* Screen-reader only utility */
+/* === Screen-reader only utility === */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -16,7 +23,7 @@
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0,0,0,0);
+  clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
 }
@@ -31,8 +38,84 @@
   white-space: normal;
 }
 
-/* Smooth scroll */
-html { scroll-behavior: smooth; }
+/* === Smooth Scrolling (respect user preference) === */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
 
-/* RTL support */
-[dir="rtl"] .flex { direction: rtl; }
+/* === RTL Support === */
+[dir="rtl"] .flex {
+  direction: rtl;
+}
+
+/* === Reduced Motion — disable animations for users who prefer it === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* === Windows High Contrast Mode support === */
+@media (forced-colors: active) {
+  button,
+  a,
+  select,
+  input,
+  textarea {
+    border: 1px solid ButtonText;
+  }
+
+  [role="progressbar"] > div {
+    background-color: Highlight;
+  }
+
+  [aria-pressed="true"] {
+    background-color: Highlight;
+    color: HighlightText;
+  }
+}
+
+/* === Auto dark mode detection (for users without explicit toggle) === */
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: dark; /* Force dark — StadiumIQ is designed dark-first */
+  }
+}
+
+/* === Alert slide-down animation === */
+@keyframes slide-down {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-down {
+  animation: slide-down 0.3s ease-out;
+}
+
+/* === Custom scrollbar for chat area === */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+}
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}

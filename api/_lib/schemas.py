@@ -49,10 +49,7 @@ class ChatRequest(BaseModel):
     def validate_section(cls, v: Optional[str]) -> Optional[str]:
         """Validate section format to prevent injection attacks."""
         if v is not None and not _SECTION_PATTERN.match(v):
-            raise ValueError(
-                "Section must contain only alphanumeric characters, "
-                "hyphens, and spaces (max 20 chars)."
-            )
+            raise ValueError("Section must contain only alphanumeric characters, hyphens, and spaces (max 20 chars).")
         return v
 
     @field_validator("message")

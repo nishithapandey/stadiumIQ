@@ -87,9 +87,16 @@ coverage/
 .nyc_output/
 *.lcov
 
+# Vercel
+.vercel/
+
 # Misc
 .temp/
 .tmp/
 *.bak
 *.backup
 *~
+
+# Planning/Development artifacts
+.planning/
+.gemini/

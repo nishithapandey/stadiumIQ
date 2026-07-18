@@ -4,7 +4,7 @@ Each persona receives a tailored system prompt that guides the AI's
 tone, scope, and response format. Safety rules are always appended.
 """
 
-from models.schemas import PersonaType, Language
+from ._lib.schemas import PersonaType, Language
 
 LANGUAGE_NAMES: dict[str, str] = {
     "en": "English",

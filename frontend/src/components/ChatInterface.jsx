@@ -1,68 +1,56 @@
-import { useState, useRef, useEffect } from "react";
+/**
+ * ChatInterface — AI chat component using useChat custom hook.
+ *
+ * Features:
+ * - Separated logic via useChat hook
+ * - Auto-scroll to latest message
+ * - Character count indicator
+ * - Loading spinner with accessible labels
+ * - Error display with alert role
+ */
 import { useTranslation } from "react-i18next";
 import { Send, Loader2 } from "lucide-react";
-import { sendChat } from "../services/api";
+import useChat from "../hooks/useChat";
 
 export default function ChatInterface({ persona, language, onAlert, highContrast }) {
   const { t } = useTranslation();
-  const [messages, setMessages] = useState([
-    { role: "assistant", content: t("welcome_message") }
-  ]);
-  const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const bottomRef = useRef(null);
-  const inputRef = useRef(null);
-  
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-  
-  const handleSend = async () => {
-    const text = input.trim();
-    if (!text || loading) return;
-    
-    const userMsg = { role: "user", content: text };
-    setMessages((prev) => [...prev, userMsg]);
-    setInput("");
-    setLoading(true);
-    setError(null);
-    
-    try {
-      const history = messages.slice(-10);
-      const data = await sendChat({ message: text, persona, language, history });
-      setMessages((prev) => [...prev, { role: "assistant", content: data.reply }]);
-      if (data.alert) onAlert(data.alert);
-    } catch (err) {
-      setError(t("error_message"));
-    } finally {
-      setLoading(false);
-      inputRef.current?.focus();
-    }
-  };
-  
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleSend();
-    }
-  };
-  
-  const inputBg = highContrast ? "bg-black border-yellow-300 text-yellow-300 placeholder-yellow-700" : "bg-slate-800 border-slate-600 text-white placeholder-slate-400";
+  const {
+    messages,
+    input,
+    setInput,
+    loading,
+    error,
+    bottomRef,
+    inputRef,
+    handleSend,
+    handleKeyDown,
+  } = useChat({
+    persona,
+    language,
+    onAlert,
+    welcomeMessage: t("welcome_message"),
+  });
+
+  const inputBg = highContrast
+    ? "bg-black border-yellow-300 text-yellow-300 placeholder-yellow-700"
+    : "bg-slate-800 border-slate-600 text-white placeholder-slate-400";
   const bubbleUser = highContrast ? "bg-yellow-300 text-black" : "bg-blue-600 text-white";
   const bubbleAssistant = highContrast ? "bg-yellow-900 text-yellow-100" : "bg-slate-700 text-white";
-  
+
   return (
     <section aria-label={t("chat_section_label")}>
       {/* Message list */}
       <div
-        className="h-[55vh] overflow-y-auto space-y-3 py-2"
+        className="h-[55vh] overflow-y-auto space-y-3 py-2 scroll-smooth"
         role="log"
         aria-live="polite"
         aria-label={t("conversation_log")}
       >
         {messages.map((msg, i) => (
-          <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+          <div
+            key={`${msg.role}-${i}`}
+            className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+          >
             <div
               className={`max-w-[80%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed
                 ${msg.role === "user" ? bubbleUser : bubbleAssistant}`}
@@ -72,7 +60,7 @@ export default function ChatInterface({ persona, language, onAlert, highContrast
             </div>
           </div>
         ))}
-        
+
         {loading && (
           <div className="flex justify-start" aria-live="assertive" aria-label={t("loading_label")}>
             <div className={`px-4 py-2.5 rounded-2xl ${bubbleAssistant} flex items-center gap-2 text-sm`}>
@@ -81,16 +69,20 @@ export default function ChatInterface({ persona, language, onAlert, highContrast
             </div>
           </div>
         )}
-        
+
         {error && (
-          <div className="text-red-400 text-sm text-center" role="alert">{error}</div>
+          <div className="text-red-400 text-sm text-center" role="alert">
+            {error}
+          </div>
         )}
         <div ref={bottomRef} />
       </div>
-      
+
       {/* Input area */}
       <div className="flex gap-2 mt-3">
-        <label htmlFor="chat-input" className="sr-only">{t("input_label")}</label>
+        <label htmlFor="chat-input" className="sr-only">
+          {t("input_label")}
+        </label>
         <textarea
           id="chat-input"
           ref={inputRef}
@@ -112,7 +104,9 @@ export default function ChatInterface({ persona, language, onAlert, highContrast
           <Send className="w-5 h-5" aria-hidden="true" />
         </button>
       </div>
-      <p className="text-xs text-slate-500 mt-1 text-right">{input.length}/500</p>
+      <p className={`text-xs mt-1 text-right ${highContrast ? "text-yellow-700" : "text-slate-500"}`}>
+        {input.length}/500
+      </p>
     </section>
   );
 }
