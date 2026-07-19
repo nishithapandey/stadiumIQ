@@ -6,6 +6,28 @@
 
 ---
 
+## 🏆 Problem Statement Alignment
+
+### 📍 Chosen Vertical
+**Smart Stadium & Tournament Operations**
+
+### 🧠 Approach and Logic
+The application uses GenAI to deliver personalized, persona-driven interactions. By providing system prompts tailored to distinct user roles (Fan, Staff, Volunteer, Organizer), the AI logic ensures the user receives only contextually relevant responses. Real-time operations are handled by integrating static data (transport, layout) and dynamic simulation (crowd density) to present actionable insights through an accessible React frontend and a FastAPI backend.
+
+### ⚙️ How the Solution Works
+1. **Frontend (React 18)**: Users select a persona and language, interacting via a chat UI, crowd dashboard, or navigation panel. 
+2. **Backend (FastAPI)**: Receives requests, enforces rate limiting/security, and formats data.
+3. **AI Core (Gemini 2.5 Flash)**: Processes queries with persona-specific system prompts, retaining a 10-turn history.
+4. **Operations (Simulated & Static)**: Crowd density is simulated via a time-based sinusoidal model for real-time heatmap updates, while transport data is loaded statically.
+
+### 📝 Assumptions Made
+- The AI responds based on general knowledge of a standard FIFA-grade stadium layout.
+- The Gemini API is available and responsive for real-time chat.
+- User location (section) is provided by the frontend if available.
+- Wheelchair-accessible routes are inferred by the GenAI model during navigation generation.
+
+---
+
 ## ✨ Features
 
 ### 🤖 GenAI Core (Google Gemini 2.5 Flash)

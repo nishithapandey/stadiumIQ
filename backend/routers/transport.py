@@ -25,6 +25,6 @@ def _load_transport() -> dict:
 
 
 @router.get("/transport")
-async def transport_options():
+async def transport_options() -> dict:
     """Return available transport options to/from the stadium."""
     return _load_transport()

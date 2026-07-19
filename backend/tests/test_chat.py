@@ -142,3 +142,23 @@ async def test_transport_endpoint():
         assert "type" in opt
         assert "routes" in opt
         assert "frequency" in opt
+
+
+@pytest.mark.asyncio
+async def test_navigation_endpoint():
+    """Navigation endpoint should return step-by-step instructions."""
+    with patch("routers.navigation.generate_response", new_callable=AsyncMock) as mock_gen:
+        mock_gen.return_value = "1. Walk straight\n2. Turn left\nEstimated walking time: 5 minutes"
+        async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
+            resp = await ac.post("/api/navigation", json={
+                "from_location": "Gate A",
+                "to_location": "Section 212",
+                "accessibility_needed": True,
+                "language": "en"
+            })
+    assert resp.status_code == 200
+    data = resp.json()
+    assert "steps" in data
+    assert len(data["steps"]) == 2
+    assert data["estimated_minutes"] == 5
+    assert "♿" in data["accessibility_note"]

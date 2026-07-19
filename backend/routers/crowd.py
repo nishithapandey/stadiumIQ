@@ -8,6 +8,6 @@ router = APIRouter()
 
 
 @router.get("/crowd/status", response_model=list[CrowdStatus])
-async def crowd_status():
+async def crowd_status() -> list[CrowdStatus]:
     """Return simulated real-time crowd density for all gates."""
     return get_all_gate_statuses()

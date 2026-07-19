@@ -79,6 +79,8 @@ async def add_security_headers(request: Request, call_next) -> Response:
     response.headers["X-Frame-Options"] = "DENY"
     response.headers["X-XSS-Protection"] = "1; mode=block"
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    response.headers["Content-Security-Policy"] = "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: https:; connect-src 'self' https: http:"
     return response
 
 
@@ -91,6 +93,6 @@ app.include_router(transport.router, prefix="/api", tags=["Transport"])
 
 
 @app.get("/health")
-async def health_check():
+async def health_check() -> dict:
     """Health check endpoint for monitoring and load balancer probes."""
     return {"status": "ok", "service": "StadiumIQ", "version": "1.0.0"}
